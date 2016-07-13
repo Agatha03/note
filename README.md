@@ -34,7 +34,7 @@ language 指定JSP页面使用的脚本语言默认值为java
 3、JSP脚本注释：在JSP脚本里 ```<% //单行注释和 /**/多行注释 &> ```客户端不可见
 
 ####三、JSP脚本 
-```<% java代码%>```
+<% java代码%>
 
 #####四、JSP声明
 1、指在JSP页面中中定义变量或者方法
@@ -71,25 +71,27 @@ language 指定JSP页面使用的脚本语言默认值为java
 #####out对象
 1. out对象是JspWriter类的实例，是向客户端（这里指浏览器）输出内容的常用对象。
 2. 常用方法：
-```void println()向客户端打印字符串
+```
+void println()向客户端打印字符串
 void clear()清除缓冲区的内容。如果在flush之后调用，会抛出异常
 void clearBuffer() 也是清除缓冲区内容，但在flush调用之后不会抛出异常
 void flush()将缓冲区内容输出到客户端
 int getBufferSize()返回缓冲区的大小（字节数），如不设缓冲区则为0
 int getRemaining()返回缓冲区还剩余多少可用
 boolean isAutoFlush()返回缓冲区满时，是否自动清空缓冲区
-void close()关闭输出流```
+void close()关闭输出流
+```
 
 1、表单标签：
-```<form name="loginForm"(表单名字) action="a.jsp"(表示表单提交给谁去处理) method="get"(或者是"post) /form> ```
+```<form name="loginForm"(表单名字) action="a.jsp"(表示表单提交给谁去处理) method="get"(或者是"post) /form> 
+```
 get(在URL中可以知道相关信息如搜索关键词等)、 post
-
 2、 使用Table设置表单
 ```<tr></tr>：一行
 <td></td>:一行中的一项
 如标签：<td><input type="text"name="username"/></td> //name可以实现验证功能
-name中type对应的是类型，如text类型，password类型。```
-
+name中type对应的是类型，如text类型，password类型。
+```
 
 #####get和post 
 表单有两种提交方式：get与post
@@ -118,17 +120,16 @@ String getContentType() 得到请求体的MIME类型
 
 String getProtovol() 返回请求用的协议类型和版本号
 
-String getSeverName() 返回接受请求的服务器主机名```
+String getSeverName() 返回接受请求的服务器主机名
+```
 
 #####解决url传中文参数出现乱码问题:
-
+```
 tomcat > conf> server.xml
-
 <Connector port="8080"protocol="HTTP/1.1"
-
 connectionTimeout="20000"
-
 redirectPort="8443" 【URLEncoding="utf-8"】添加这一句，修改服务器编码方式/>
+```
 
 #####常用方法(二)
 ```
@@ -144,7 +145,8 @@ String getRemoteAddr()返回发送此请求的客户端IP地址
 
 String getRealPath(Stringpath) 返回一虚拟路径的真实路径
 
-Stringrequest.getContextPath() 返回上下文路径```
+Stringrequest.getContextPath() 返回上下文路径
+```
 
 
 ####五、response对象
@@ -153,7 +155,8 @@ Stringrequest.getContextPath() 返回上下文路径```
 ```
 PrintWritergetWriter（）也可以在网页上输出，写在out对象后面也能在out前面输出，要解决可以用out.flash（）
 response.sendRedirect(Stringaddr) 请求重定向
-response.setContentType(“text/html;charset=utf-8”); 设置响应的MIME类型```
+response.setContentType(“text/html;charset=utf-8”); 设置响应的MIME类型
+```
  
 
 ####六、请求重定向与请求转发的区别
@@ -179,18 +182,14 @@ response.setContentType(“text/html;charset=utf-8”); 设置响应的MIME类�
 #####session对象的常用方法
 ```
 long getCreationTime() ：返回session的创建时间；
-
 public String getId() ：返回session的唯一ID号（该ID在session生成时，由JSP引擎创建）
-
 public Object setAttribute(String name,Objectvalue) ：按照键值对的方式在该session会话中保存一个属性（该属性是一个对象类型）
-
 public Object getAttribute(String name) ：返回指定名称的属性的值（如果该名称的属性不存在，则返回null）
-
 String[] getValueNames() ：返回一个（包含在此session中所有可用属性）的数组。
-int getMaxInactiveInterval() ：返回一个时间，该时间表示当前session间隔多少时间之后会失效（单位：秒）```
+int getMaxInactiveInterval() ：返回一个时间，该时间表示当前session间隔多少时间之后会失效（单位：秒）
+```
  
 ######session的生命周期
-
 1. 创建：当客户端第一次访问某个jsp或者servlet时候，服务器会为当前会话创建一个SessionId，每次客户端向服务器发送请求时，都会将此SessionId携带过去，服务端会对此SessionId进行校验
 2. 活动：
 ①某次会话当中通过超链接打开的新页面属于同一次会话
@@ -210,7 +209,8 @@ tomcat默认session超时时间为30分钟
 <session-timeout>
 10
 <session-timeout>
-<session-config> //单位是分钟```
+<session-config> //单位是分钟
+```
 
 ####八、application对象
 1. 实现了用户间数据的共享，可存放全局变量。（类似静态对象）
@@ -224,7 +224,8 @@ tomcat默认session超时时间为30分钟
 publicvoid setAttribute(String name, Object value) 使用指定名称将对象绑定到此对话
 publicObject getAttribute(String name) 返回与此会话中的指定名称绑定在一起的对象，如果没有对象绑定在该名称下，则返回null
 EnumerationgetAttributeNames() 返回所有可用属性名的枚举
-StringgetServerInfo() 返回JSP(SERVLET)引擎名及版本号```
+StringgetServerInfo() 返回JSP(SERVLET)引擎名及版本号
+```
  
 ####九、page对象
 page对象就是指向当前JSP页面本身，有点像类中的this指针，它是java.lang.Object类的实例。
@@ -240,7 +241,8 @@ String toString() 把此Object对象转换成String类的对象
 void notify() 唤醒一个等待的线程
 void notifyAll() 唤醒所有等待的线程
 void wait(int timeout)使一个线程处于等待直到timeout结束或被唤醒
-void wait() 使一个线程处于等待直到被唤醒```
+void wait() 使一个线程处于等待直到被唤醒
+```
  
 ####十、pageContext对象
 
@@ -248,7 +250,8 @@ void wait() 使一个线程处于等待直到被唤醒```
 pageContext对象提供了对JSP页面内所有的对象及名字空间的访问
 pageContext对象可以访问到本页所在的session，也可以取本页面所在的application的某一属性值
 pageContext对象相当于页面中所有功能的集大成者
-pageContext对象本类名也叫pageContext```
+pageContext对象本类名也叫pageContext
+```
 ![](https://github.com/Agatha03/note/blob/master/images/pagcontext.jpg)
 
 ####十一、Config对象
@@ -290,22 +293,28 @@ JSP动作元素，动作元素为请求处理阶段提供信息。
 
 #####常用的三个动作
 **useBeans动作**
-```<jsp:useBeanid="标识符"class="java类"scope="使用范围">```
+```<jsp:useBeanid="标识符"class="java类"scope="使用范围">
+```
 **setProperty动作**
 - 在JSP中为javabean对象实例的属性赋值的方法
 1. 普通的set方法
 2. JSP的动作指令：```<jsp:setProperty></jsp:setProperty>```
 1)根据表单自动匹配对象的所有属性
-```<jsp:setPropertyproperty="*" name="myUser" ></jsp:setProperty>```
+```<jsp:setPropertyproperty="*" name="myUser" ></jsp:setProperty>
+```
 2）根据表单自动匹配指定的属性
-```<jsp:setProperty property="username"name="myUser" ></jsp:setProperty>```
+```<jsp:setProperty property="username"name="myUser" ></jsp:setProperty>
+```
 3）与表单无关，通过手工赋值给属性
-```<jsp:setProperty property="username"name="myUser" value="lisi"></jsp:setProperty>```
+```<jsp:setProperty property="username"name="myUser" value="lisi"></jsp:setProperty>
+```
 4）通过URL传参数给属性赋值
-```<jsp:setProperty property="username"name="myUser" param="myname">            </jsp:setProperty>```
+```<jsp:setProperty property="username"name="myUser" param="myname">           </jsp:setProperty>
+```
 **getProperty动作**
 作用：获取指定Javabean对象的属性值。
-```<jsp:getProperty name = "javabean实例名" property = "属性名" />```
+```<jsp:getProperty name = "javabean实例名" property = "属性名" />
+```
 
 #####scope四种作用域范围
 1. application 全局范围(application.getAttrbytes("id".get....))
@@ -370,13 +379,16 @@ expiry:为负值：表示当浏览器关闭时，删除该cookie
 定义时间类：
 ```Date xx=new Date();
 simpleDateFormat XX=newsimpleDateFormat("yyyy-MM-dd");
-String XXX=XX.format(xx);```
+String XXX=XX.format(xx);
+```
 
 #####include动作：
-```<jsp:include page="url"flush="false"/>```
+```<jsp:include page="url"flush="false"/>
+```
 
 #####include指令：
-```<%@include file="url" %>```
+```<%@include file="url" %>
+```
 
 *page 要包含的页面
 flush 被包含的页面是否从缓冲区读取*
@@ -384,7 +396,8 @@ flush 被包含的页面是否从缓冲区读取*
 #####include指令和include动作比较
 ![](https://github.com/Agatha03/note/blob/master/images/ommandandaction.jpg)
 #####Forward动作
-```<jsp:forward page="URL"/>```
+```<jsp:forward page="URL"/>
+```
 
 这个指令等同于```request.getRequestDispatcher().forward(request,response);```
  
